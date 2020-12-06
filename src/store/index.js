@@ -10,7 +10,7 @@ export default createStore({
   },
   state: {
     publicWords: [],
-    userWords: [],
+    userWords: null,
     languages: [
       {
         image: require("@/assets/images/languages/english.png"),
@@ -34,7 +34,7 @@ export default createStore({
       state.questions.name = name
       console.log(state.questions);
     },
-    setUserWords: (state, words) => state.userWords.push(words)
+    setUserWords: (state, words) => state.userWords = words
   },
   actions: {
     async translateWord(vuexContext, word) {
@@ -49,7 +49,7 @@ export default createStore({
       vuexContext.commit('setTranslationResult', data.result)
     },
     async userWords(vuexContext) {
-      vuexContext.state.userWords.length = 0
+      vuexContext.state.userWords = null
       const response = await fetch(`${API_URL}/word-list`, {
         method: 'POST',
         headers: {

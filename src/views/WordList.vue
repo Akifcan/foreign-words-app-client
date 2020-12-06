@@ -14,18 +14,22 @@ export default {
     store.dispatch("userWords");
 
     function imagePath(image) {
-      return `${API_URL}/${image}`;
+      if (image.startsWith("https")) {
+        return image;
+      } else {
+        return `${API_URL}/${image}`;
+      }
     }
 
-    const userWords = computed(() => store.state["userWords"]);
+    const userWordss = computed(() => store.state["userWords"]);
 
-    return { userWords, imagePath };
+    return { userWordss, imagePath };
   },
 };
 </script>
 
 <template>
-  <div class="container" v-if="userWords">
+  <div class="container">
     <h1>Word List</h1>
     <AppAlert v-if="!user">
       <h1>Giriş yapmadınız</h1>
@@ -34,38 +38,19 @@ export default {
         oluşturabilirsiniz.
       </p>
     </AppAlert>
-    <div class="words" v-for="word in userWords" :key="word._id">
-      <div class="word-list">
-        <router-link
-          tag="a"
-          :to="{ name: 'quiz', params: { id: word[0]._id } }"
-        >
-          <img :src="imagePath(word[0].thumbnailImage)" :alt="word[0].name" />
-          <div class="info">
-            <h1 class="language">İngilizce</h1>
-            <h1>{{ word[0].name }}</h1>
-          </div>
-        </router-link>
+    <div v-if="userWordss">
+      <div class="words" v-for="word in userWordss" :key="word._id">
+        <div class="word-list">
+          <router-link tag="a" :to="{ name: 'quiz', params: { id: word._id } }">
+            <img :src="imagePath(word.thumbnailImage)" :alt="word.name" />
+            <div class="info">
+              <h1 class="language">İngilizce</h1>
+              <h1>{{ word.name }}</h1>
+            </div>
+          </router-link>
+        </div>
       </div>
     </div>
-    <!-- <div v-if="userWords.length > 0">
-      <div class="words" v-for="word in userWords" :key="word._id">
-        <AppWordCard :word="word" />
-      </div>
-    </div>
-
-    <div class="empty-yet" v-else>
-      <img
-        style="width: 250px"
-        :src="require('@/assets/images/empty.png')"
-        alt="no word list created"
-      />
-
-      <h3>Henüz bir kelime listesi oluşturmadınız.</h3>
-      <router-link :to="{ name: 'create' }" tag="button" class="submit"
-        >Oluşturmaya başlayın</router-link
-      >
-    </div> -->
   </div>
 </template>
 
