@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;500;700;900&display=swap");
+:root {
+  --font-raleway: "Raleway", sans-serif;
+
+  --color-blue-900: #0D47A1;
+  --color-blue-800: #1565C0;
+  --color-light-green-900: #33691E;
+  --color-red-900: #B71C1C;
+  --color-amber-900: #FF6F00;
+  --color-main-background: #dedede;
+}
+* {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-raleway);
+}
+
+
+.container{
+  padding: .5em 1em;
+}
+
+.mt-2{
+  margin-top: 2em;
+}
+
+.form-group{
+  input, select{
+    width: 100%;
+    display: block;
+    outline: none;
+    margin: .5em 0;
+    padding: 1em;
+    border: 0;
+  }
+  
+}
+
+.submit {
+  cursor: pointer;
+  border-radius: 0.5em;
+  cursor: pointer;
+  background: var(--color-blue-900);
+  color: white;
+  padding: 1em;
+  border: 0;
+  @media (min-width: 1000px) {
+    margin-top: 1.5em;
+  }
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  text-align: left;
+  th,
+  td {
+    padding: 0.5em;
+  }
+}
+
+tr:nth-of-type(even),
+th {
+  background: whitesmoke;
+}
+
+.words {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  h1{
+    grid-column: 1/-1;
+  }
+  .word-list{
+    padding-bottom: 1em;
+    border-bottom: 2px solid var(--color-blue-900);
+    transition: transform 250ms;
+    text-transform: capitalize;
+    .info{
+      display: flex;
+      justify-content: space-between;
+    }
+    &:hover,
+    &:focus{
+      transform: translateY(-20px);
+    }
+  }
+}
