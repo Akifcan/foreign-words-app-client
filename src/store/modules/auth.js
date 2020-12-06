@@ -2,7 +2,7 @@ import { API_URL } from '../constants'
 import router from '../../router'
 
 const state = {
-    user: {},
+    user: null,
     message: null
 }
 const getters = {

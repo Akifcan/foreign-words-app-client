@@ -33,6 +33,9 @@ export default {
           console.log("yanlış cevap");
         }
       }
+      if (questions.value[currentQuestion.value].type == 1) {
+        result.value = "Doğru cevap tebrikler 🎉";
+      }
       if (questions.value[currentQuestion.value].type == 2) {
         if (answer == questions.value[currentQuestion.value].letter) {
           result.value = "Doğru cevap tebrikler 🎉";
